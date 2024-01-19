@@ -1,0 +1,12 @@
+<%#ツイート投稿すべてを表示するためのビュー%>
+<div class="contents row">
+  <% @tweets.each do |tweet| %>
+  <%#eachメソッドを使い、すべてのツイートを表示%>
+    <div class="content_post" style="background-image: url(<%= tweet.image %>);">
+      <p><%= tweet.text %></p>
+      <span class="name">
+        <%= tweet.name %>
+      </span>
+    </div>
+  <% end %>
+</div>
