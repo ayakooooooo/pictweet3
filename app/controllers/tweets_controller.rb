@@ -15,6 +15,12 @@ class TweetsController < ApplicationController
     #保存後はredirect_toを使用してトップページ表示
   end
 
+  def destroy
+    tweet = Tweet.find(params[:id])
+    tweet.destroy
+    redirect_to root_path
+  end
+  
   private
   def tweet_params
     #ストロングパラメーター定義
