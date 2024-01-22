@@ -1,4 +1,6 @@
 class TweetsController < ApplicationController
+  before_action :set_tweet, only: [:edit, :show]
+
   def index
     @tweets = Tweet.all
     #allメソッドを使用して、tweetsテーブルすべてのレコードをインスタンス変数に代入し、ビューに受け渡し
@@ -22,7 +24,6 @@ class TweetsController < ApplicationController
   end
 
   def edit
-    @tweet = Tweet.find(params[:id])
   end
 
   def update
@@ -32,7 +33,6 @@ class TweetsController < ApplicationController
   end
 
   def show
-    @tweet = Tweet.find(params[:id])
   end
 
   private
@@ -40,5 +40,8 @@ class TweetsController < ApplicationController
     #ストロングパラメーター定義
     params.require(:tweet).permit(:name, :image, :text)
     #特定のキーを受け取るように制限
+  end
+  def set_tweet
+    @tweet = Tweet.find(params[:id])
   end
 end
