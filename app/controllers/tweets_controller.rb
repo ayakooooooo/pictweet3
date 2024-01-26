@@ -1,6 +1,9 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:edit, :show]
-
+  before_action :move_to_index, except: [:index, :show]#リダイレクト処理
+  #indexアクションにアクセスした場合、indexアクションへのリダイレクトを繰り返してしまい、無限ループが起こります。この対策
+  #ログインしていなくても、詳細ページに遷移できる仕様にするためにexcept: [:index, :show]
+  
   def index
     @tweets = Tweet.all
     #allメソッドを使用して、tweetsテーブルすべてのレコードをインスタンス変数に代入し、ビューに受け渡し
@@ -43,5 +46,10 @@ class TweetsController < ApplicationController
   end
   def set_tweet
     @tweet = Tweet.find(params[:id])
+  end
+  def move_to_index
+    unless user_signed_in? #ログインしていない状態
+      redirect_to action: :index #indexアクションのindex.html.erbページにリダイレクト
+    end
   end
 end
