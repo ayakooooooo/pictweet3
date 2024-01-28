@@ -41,8 +41,9 @@ class TweetsController < ApplicationController
   private
   def tweet_params
     #ストロングパラメーター定義
-    params.require(:tweet).permit(:name, :image, :text)
+    params.require(:tweet).permit(:name, :image, :text).merge(user_id: current_user.id)
     #特定のキーを受け取るように制限
+    #tweetの情報を持つハッシュと、user_idを持つハッシュを結合
   end
   def set_tweet
     @tweet = Tweet.find(params[:id])
