@@ -19,7 +19,10 @@
       </div>
       <p><%= tweet.text %></p>
       <span class="name">
-        <%= tweet.name %>
+        <a href="/users/<%= tweet.user.id %>">
+          <span>投稿者</span><%= tweet.user.nickname %>
+          <%#アソシエーションを定義しているので、Tweetモデルのインスタンスが入った変数.userと記述すると、インスタンスが属しているUserモデルのインスタンスを取得できる%>
+        </a>
       </span>
     </div>
   <% end %>
