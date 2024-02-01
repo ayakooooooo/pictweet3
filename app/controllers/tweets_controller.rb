@@ -5,8 +5,9 @@ class TweetsController < ApplicationController
   #ログインしていなくても、詳細ページに遷移できる仕様にするためにexcept: [:index, :show]
   
   def index
-    @tweets = Tweet.all
-    #allメソッドを使用して、tweetsテーブルすべてのレコードをインスタンス変数に代入し、ビューに受け渡し
+    @tweets = Tweet.includes(:user)
+    #includesメソッドを使用してN+1問題を解消
+    #変更前 @tweets = Tweet.all allメソッドを使用して、tweetsテーブルすべてのレコードをインスタンス変数に代入し、ビューに受け渡し
   end
   def new
     @tweet = Tweet.new
